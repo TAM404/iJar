@@ -68,8 +68,16 @@ export default defineComponent({
     StarRating,
     AgencyMap
   },
+  props: {
+    agency: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
+
+      /*
       agency: {
         name: 'Premium Real Estate Agency',
         logoUrl: 'https://media.licdn.com/dms/image/v2/D560BAQEzr8qXBdRLgA/company-logo_200_200/company-logo_200_200/0/1715902987353/sothebysrealty_logo?e=2147483647&v=beta&t=VgNn94g57aU-m5oilNRaAtW312BNKXRgAAqUb1QcsjM',
@@ -145,7 +153,7 @@ export default defineComponent({
           { text: 'Blog', url: '#' },
           { text: 'Contact', url: '#' }
         ]
-      }
+      }*/
     }
   }
 })
