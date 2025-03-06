@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AgencyProfile from '@/components/RealEstate/AgencyProfile.vue'
+import AgencyProfileMain   from '@/views/AgencyProfileMain.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: AgencyProfile,
+      component: AgencyProfileMain,
     },
     {
       path: '/about',

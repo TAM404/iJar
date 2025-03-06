@@ -4,17 +4,18 @@ import { agencyService } from '../controllers/agencyAPI.js'
 import AgencyProfile from '../components/RealEstate/AgencyProfile.vue'
 const agencyId = ref(1) // Replace with your actual agency ID
 const agencyData = ref(null)
-const loading = ref(false)
+const loading = ref(true)
 const error = ref(null)
 
 const loadAgencyProfile = async () => {
   try {
-    loading.value = true
+    loading.value = true;
     agencyData.value = await agencyService.getAgencyProfile(agencyId.value)
+    console.log('ff',agencyData.value)
   } catch (err) {
     error.value = err.message
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
@@ -40,7 +41,7 @@ onMounted(() => {
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
-        <AgencyProfile :agencyData="agencyData" @updateProfile="updateProfile" />
+        <AgencyProfile :agency="agencyData" @updateProfile="updateProfile" />
     </div>
-  </template>
 </div>
+  </template>

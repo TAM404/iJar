@@ -6,7 +6,7 @@
         <div class="flex-1 min-w-0 flex items-center space-x-6">
           <div class="w-28 h-28 relative overflow-hidden rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img
-                :src="agency.logoUrl"
+                :src="agency.logo_url"
                 :alt="agency.name"
                 class="object-cover w-full h-full"
             />
@@ -59,7 +59,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    console.log('agency', props.agency)
     const isScrolled = ref(false);
 
     const handleScroll = () => {
