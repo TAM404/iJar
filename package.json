@@ -10,14 +10,20 @@
     "test:unit": "vitest"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@heroicons/vue": "^2.2.0",
     "@supabase/supabase-js": "^2.49.1",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "heroicons": "^2.2.0",
     "leaflet": "^1.9.4",
     "lucide-vue-next": "^0.477.0",
     "pinia": "^3.0.1",
+    "supabase": "^2.15.8",
+    "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
