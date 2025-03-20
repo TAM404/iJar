@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { signUp, signIn, signOut } from '../utils/database/users/usersAuth';
 import { getUserById as fetchUser, updateUserProfile } from '../utils/database/users/usersAPI';
-
+import { supabase } from '@/utils/database/supabase';
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: null,
@@ -10,18 +10,28 @@ export const useUserStore = defineStore('user', {
   }),
   
   actions: {
-    async signUp({ email, password, userData }) {
+    async initializeSession() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        this.user = { id: session.user.id, email: session.user.email };
+      }
+      supabase.auth.onAuthStateChange((_, session) => {
+        this.user = session?.user ? { id: session.user.id, email: session.user.email } : null;
+      });
+    },
+    async signUp({ email, password, name, phonenumber, birthday, locations, favorites}) {
       try {
         this.loading = true;
         this.error = null;
 
         // Call the signUp function from usersAuth.js which handles both auth and user data
+        
         const { user, data } = await signUp(email, password, {
-          name: userData.name,
-          phonenumber: userData.phonenumber,
-          birthday: userData.birthday,
-          locations: userData.locations || [],
-          favorites: userData.favorites || []
+          name: name,
+          phonenumber: phonenumber || '' ,
+          birthday: birthday || new Date(0),
+          locations: locations || [],
+          favorites: favorites || []
         });
 
         if (!user) {

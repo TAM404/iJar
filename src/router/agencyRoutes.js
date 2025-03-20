@@ -1,11 +1,11 @@
-import AgencyProfile from '../components/agency/AgencyShow/AgencyProfile.vue';
+import AgencyProfile from '../components/agency/AgencyProfile/AgencyProfile.vue';
 import { supabase } from '@/utils/database/supabase';
 
 export const agencyRoutes = [
   {
     path: '/agency/create',
     name: 'createAgency',
-    component: () => import('@/components/agency/AgencyCreate/AgencyInput.vue'),
+    component: () => import('@/components/agency/InputForm/AgencyInput.vue'),
     meta: { requiresAuth: true },
     beforeEnter: async (to, from, next) => {
       // Get the current session using getSession()
@@ -22,7 +22,7 @@ export const agencyRoutes = [
   {
     path: '/agency/:id',
     name: 'agencyProfile',
-    component: AgencyProfile,
+    component: () => import('@/components/agency/AgencyUserManager.vue'),
     props: true
   }
 ];

@@ -14,7 +14,7 @@ const signUp = async (email, password, userData) => {
     if (!authData?.user) throw new Error('No user returned from auth signup');
 
     // Insert the user into the `users` table
-    const { data, error: userError } = await insertUser(authData.user.id, userData);
+    const { data, error: userError } = await insertUser(authData.user.id, {...userData, email:email});
 
     if (userError) throw userError;
 

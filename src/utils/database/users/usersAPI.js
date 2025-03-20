@@ -1,9 +1,10 @@
+import { email } from '@vuelidate/validators';
 import {supabase} from '../supabase';
 
 // Function to insert a user into the `users` table
 const insertUser = async (userId, userData) => {
-  const { name, phonenumber, birthday, locations, favorites } = userData;
-
+  const { name, phonenumber, birthday, locations, favorites,email } = userData;
+  console.log('insertuser ',userData);
   const { data, error } = await supabase
     .from('users')
     .insert([
@@ -14,6 +15,7 @@ const insertUser = async (userId, userData) => {
         birthday,
         locations: locations || [],
         favorites: favorites || [],
+        email,
       },
     ]);
 

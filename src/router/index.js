@@ -6,6 +6,7 @@ import NotFound from '@/components/NotFound.vue';
 
 const routes = [
   { path: '/', redirect: '/login' },
+  { path: '/home', component: () => import('@/components/Search/HouseMap.vue') },
   ...authRoutes,
   ...dashboardRoutes,
   ...agencyRoutes,

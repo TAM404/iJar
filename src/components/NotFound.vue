@@ -13,7 +13,9 @@
         <p><span class="font-medium">Birthday:</span> {{ formatDate(userStore.user.birthday) }}</p>
       </div>
     </div>
-
+    <div v-else>
+      No Account Signed in
+    </div>
     <router-link to="/" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200">
       Go Home
     </router-link>
@@ -22,9 +24,16 @@
 
 <script setup>
 import { useUserStore } from '@/stores/userStore';
-
+import { onMounted, ref } from 'vue';
+import { supabase } from '@/utils/database/supabase';
+const user = ref(null);
+const loading = ref(true);
 const userStore = useUserStore();
 
+onMounted(async () => {
+   await userStore.initializeSession();
+  loading.value = false;
+});
 // Helper function to format the date
 const formatDate = (dateString) => {
   if (!dateString) return 'Not set';

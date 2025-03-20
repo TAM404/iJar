@@ -24,6 +24,7 @@ export const useAgencyStore = defineStore('agency', {
         this.error = error.message;
       } finally {
         this.loading = false;
+        return this.agency;
       }
     },
     async fetchAgencies() {
@@ -35,6 +36,7 @@ export const useAgencyStore = defineStore('agency', {
         this.error = error.message;
       } finally {
         this.loading = false;
+        return this.agencies;
       }
     },
     async createAgency(agencyData) {

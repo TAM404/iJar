@@ -2,32 +2,25 @@ import { supabase } from '../supabase';
 
 // Function to insert a new agency into the `agencies` table
 const insertAgency = async (agencyData) => {
-  const { name, logo_url, rating, review_count, year_founded, properties_sold, agents_count, client_satisfaction, description, address, hours, phone, email, website, location, services, awards, social_media, quick_links, footer_text } = agencyData;
+  const { name, logoUrl, description, services, address, hours, phone, email, website, yearFounded, propertiesSold, awards, socialMedia } = agencyData;
 
   const { data, error } = await supabase
     .from('agencies')
     .insert([
       {
         name,
-        logo_url,
-        rating,
-        review_count,
-        year_founded,
-        properties_sold,
-        agents_count,
-        client_satisfaction,
+        logo_url: logoUrl,
         description,
+        services,
         address,
         hours,
         phone,
         email,
         website,
-        location,
-        services,
+        year_founded: yearFounded,
+        properties_sold: propertiesSold,
         awards,
-        social_media,
-        quick_links,
-        footer_text,
+        social_media: socialMedia,
       },
     ]);
 
@@ -43,13 +36,10 @@ const getAgencyById = async (agencyId) => {
   const { data, error } = await supabase
     .from('agencies')
     .select(`
-      *,
-      testimonials (*),
-      properties (*)
+      *
     `)
     .eq('id', agencyId)
     .single();
-
   if (error) {
     throw error;
   }
@@ -59,6 +49,7 @@ const getAgencyById = async (agencyId) => {
 
 // Function to update agency details
 const updateAgency = async (agencyId, updates) => {
+  console.log('updates', updates);
   const { data, error } = await supabase
     .from('agencies')
     .update(updates)
